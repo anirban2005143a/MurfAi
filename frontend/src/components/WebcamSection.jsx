@@ -141,6 +141,7 @@ const WebcamSection = ({
   videoRef,
   generateText,
   isTextGenterating,
+  frames,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [recordedVideoUrl, setRecordedVideoUrl] = useState(null);
@@ -263,7 +264,7 @@ const WebcamSection = ({
         <button
           onClick={handleStartClick}
           disabled={isSessionActive || isLoading}
-          className={`flex-1 py-3 px-6 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 transform ${
+          className={`flex-1 py-3 cursor-pointer px-6 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 transform ${
             isSessionActive || isLoading
               ? "bg-gray-600 text-gray-300 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700 text-white hover:-translate-y-1 shadow-lg"
@@ -280,7 +281,7 @@ const WebcamSection = ({
         <button
           onClick={handleStopClick}
           disabled={!isSessionActive}
-          className={`flex-1 py-3 px-6 rounded-xl font-semibold flex items-center justify-center transition-all duration-300 transform ${
+          className={`flex-1 py-3 px-6 cursor-pointer rounded-xl font-semibold flex items-center justify-center transition-all duration-300 transform ${
             !isSessionActive
               ? "bg-gray-600 text-gray-300 cursor-not-allowed"
               : "bg-red-600 hover:bg-red-700 text-white hover:-translate-y-1 shadow-lg"
@@ -304,23 +305,30 @@ const WebcamSection = ({
         </div>
       )}
 
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          generateText();
-        }}
-        disabled={isTextGenterating}
-        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 text-white font-medium shadow-md hover:from-gray-700 hover:to-gray-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        {isTextGenterating ? (
-          <>
-            <Loader2 className=" inline-block w-5 animate-spin mr-2" />
-            Generating
-          </>
-        ) : (
-          "Translate into text"
-        )}
-      </button>
+      {frames && frames.length > 0 && recordedVideoUrl && (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            generateText();
+          }}
+          disabled={isTextGenterating}
+          className="flex items-center justify-center px-6 py-2.5 rounded-xl 
+             bg-gradient-to-r from-purple-600 to-blue-500 
+             text-white font-semibold shadow-lg 
+             hover:from-purple-500 hover:to-blue-400 
+             transition-all duration-300 ease-in-out 
+             focus:outline-none focus:ring-2 focus:ring-purple-400 disabled:cursor-not-allowed mx-auto mt-5 cursor-pointer"
+        >
+          {isTextGenterating ? (
+            <>
+              <Loader2 className=" inline-block w-5 animate-spin mr-2" />
+              Generating
+            </>
+          ) : (
+            "Translate into text"
+          )}
+        </button>
+      )}
     </div>
   );
 };

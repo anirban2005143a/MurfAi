@@ -165,6 +165,7 @@ function TranslationPage() {
             videoRef={videoRef}
             generateText={generateText}
             isTextGenterating={isTextGenterating}
+            frames={frames}
           />
 
           <TranslationSection
