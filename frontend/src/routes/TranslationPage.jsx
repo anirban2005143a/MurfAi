@@ -120,18 +120,24 @@ function TranslationPage() {
 
     try {
       setisTextGenterating(true);
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/process-frames/`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      // const response = await axios.post(
+      //   `${import.meta.env.VITE_BACKEND_URL}/process-frames/`,
+      //   formData,
+      //   {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   }
+      // );
 
-      console.log("Response:", response.data);
-      setTranslatedText(response.data.text);
+      // console.log("Response:", response.data);
+      // setTranslatedText(response.data.text);
+
+      await new Promise((res , rej)=>{
+        setTimeout(() => {
+          setTranslatedText("Hello nice to meet you what are you doing?")
+        }, 5000);
+      })
     } catch (error) {
       showToast(
         error.response.data.message ||

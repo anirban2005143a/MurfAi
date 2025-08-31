@@ -77,7 +77,7 @@ const TranslationSection = ({
         <div className="flex-grow relative">
           {/* Trigger Button */}
           <button
-            onClick={() => setIsOpen((prev) => !prev)}
+            // onClick={() => setIsOpen((prev) => !prev)}
             className="w-full bg-gray-800 text-gray-100 font-medium py-3 pl-4 pr-10 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors flex items-center justify-between shadow-sm"
           >
             <div className="flex items-center space-x-2">
@@ -88,11 +88,11 @@ const TranslationSection = ({
                   : "Select Language"}
               </span>
             </div>
-            <ChevronDown
+            {/* <ChevronDown
               className={`w-5 h-5 cursor-pointer text-blue-400 transition-transform duration-300 ${
                 isOpen ? "rotate-180" : "rotate-0"
               }`}
-            />
+            /> */}
           </button>
 
           {/* Dropdown Menu */}
