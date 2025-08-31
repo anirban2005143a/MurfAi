@@ -131,6 +131,7 @@
 // components/WebcamSection.jsx
 import { useState, useRef, useEffect } from "react";
 import { showToast } from "../utils/showToast";
+import { Loader2 } from "lucide-react";
 
 const WebcamSection = ({
   isSessionActive,
@@ -138,6 +139,8 @@ const WebcamSection = ({
   onStopSession,
   startCapturingFrames,
   videoRef,
+  generateText,
+  isTextGenterating,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [recordedVideoUrl, setRecordedVideoUrl] = useState(null);
@@ -300,6 +303,24 @@ const WebcamSection = ({
           />
         </div>
       )}
+
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          generateText();
+        }}
+        disabled={isTextGenterating}
+        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-gray-800 to-gray-700 text-white font-medium shadow-md hover:from-gray-700 hover:to-gray-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        {isTextGenterating ? (
+          <>
+            <Loader2 className=" inline-block w-5 animate-spin mr-2" />
+            Generating
+          </>
+        ) : (
+          "Translate into text"
+        )}
+      </button>
     </div>
   );
 };

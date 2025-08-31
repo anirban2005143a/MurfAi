@@ -13,6 +13,7 @@ function TranslationPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en-IN-rohan");
   const [audio, setaudio] = useState(null);
   const [isAudioGenerating, setisAudioGenerating] = useState(false);
+  const [isTextGenterating, setisTextGenterating] = useState(false);
   const [audioDuration, setaudioDuration] = useState(0);
   const [frames, setFrames] = useState([]);
 
@@ -63,8 +64,6 @@ function TranslationPage() {
       clearInterval(captureIntervalRef.current);
       captureIntervalRef.current = null;
     }
-
-    generateText();
   };
 
   const handleGenerateVoice = async () => {
@@ -120,6 +119,7 @@ function TranslationPage() {
     });
 
     try {
+      setisTextGenterating(true);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/process-frames/`,
         formData,
@@ -140,6 +140,8 @@ function TranslationPage() {
         1
       );
       console.error("Error uploading frames:", error);
+    } finally {
+      setisTextGenterating(false);
     }
 
     // setTimeout(() => {
@@ -161,6 +163,8 @@ function TranslationPage() {
             onStopSession={handleStopSession}
             startCapturingFrames={startCapturingFrames}
             videoRef={videoRef}
+            generateText={generateText}
+            isTextGenterating={isTextGenterating}
           />
 
           <TranslationSection

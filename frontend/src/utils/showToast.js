@@ -11,7 +11,6 @@ export const showToast = (msg, err) => {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      transition: Bounce,
     });
   } else {
     toast.success(msg, {
@@ -23,7 +22,6 @@ export const showToast = (msg, err) => {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      transition: Bounce,
     });
   }
 };
